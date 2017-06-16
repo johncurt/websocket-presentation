@@ -1,0 +1,13 @@
+{
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+
+  "autoload": {
+    "psr-0": {
+      "realTimeComm": "src/"
+    }
+  },
+  "require": {
+    "cboden/ratchet": "^0.3.6"
+  }
+}
