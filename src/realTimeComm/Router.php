@@ -5,6 +5,13 @@ use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
 class Router implements MessageComponentInterface {
+	
+	private $controller;
+	
+	public function __construct(){
+		$this->controller = new \realTimeComm\Controller();
+	}
+	
 	/**
 	 * When a new connection is opened it will be passed to this method
 	 * @param  ConnectionInterface $conn The socket/connection that just connected to your application
@@ -45,7 +52,17 @@ class Router implements MessageComponentInterface {
 	 */
 	function onMessage(ConnectionInterface $from, $msg)
 	{
-		// TODO: Implement onMessage() method.
+		try {
+			$msgJSON = json_decode($msg);
+			if ($msgJSON->action != '__construct') {
+				$this->controller->{$msgJSON->action}($from, $msgJSON);
+			} else {
+				throw new \Exception('Invalid Operation');
+			}
+		} catch (\Exception $e){
+			//there was an error
+			$from->send(['action'=>'notification', 'message'=>$e->getMessage(), 'error'=>true]);
+		}
 	}
 	
 	
