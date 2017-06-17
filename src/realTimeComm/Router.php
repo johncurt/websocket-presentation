@@ -60,7 +60,12 @@ class Router implements MessageComponentInterface {
 				&& $msgJSON->action !== '__construct'
 				&& method_exists($this->controller, $msgJSON->action)
 			){
-				$this->controller->{$msgJSON->action}($from, $msgJSON);
+				$reflection = new \ReflectionMethod($this->controller, $msgJSON->action);
+				if ($reflection->isPublic()) {
+					$this->controller->{$msgJSON->action}($from, $msgJSON);
+				} else {
+					throw new \Exception('You can\'t do that!');
+				}
 			} else {
 				throw new \Exception('Invalid Operation');
 			}
