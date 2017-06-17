@@ -14,7 +14,7 @@ $server = IoServer::factory(
 			new Router(true)
 		)
 	),
-	8080
+	8100
 );
 
 //run server
