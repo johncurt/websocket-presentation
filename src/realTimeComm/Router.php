@@ -61,7 +61,7 @@ class Router implements MessageComponentInterface {
 			}
 		} catch (\Exception $e){
 			//there was an error
-			$from->send(['action'=>'notification', 'message'=>$e->getMessage(), 'error'=>true]);
+			$from->send(json_encode(['action'=>'notification', 'message'=>$e->getMessage(), 'error'=>true]));
 		}
 	}
 	
