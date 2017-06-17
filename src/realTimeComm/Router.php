@@ -54,7 +54,12 @@ class Router implements MessageComponentInterface {
 	{
 		try {
 			$msgJSON = json_decode($msg);
-			if ($msgJSON->action != '__construct') {
+			if (
+				!empty($msgJSON->action)
+				&& is_string($msgJSON->action)
+				&& $msgJSON->action !== '__construct'
+				&& method_exists($this->controller, $msgJSON->action)
+			){
 				$this->controller->{$msgJSON->action}($from, $msgJSON);
 			} else {
 				throw new \Exception('Invalid Operation');
