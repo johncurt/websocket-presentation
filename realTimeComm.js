@@ -23,7 +23,7 @@ function startConn(){
 
             switch (incomingMessage.action) {
                 case 'notification':
-                    notification(incomingMessage.message, incomingMessage.isError, incomingMessage.clearPageLoader);
+                    notification(incomingMessage.message, incomingMessage.error);
                     break;
                 default:
                     console.log('Error: Invalid action received: ' + incomingMessage.type);
@@ -48,3 +48,8 @@ $(document).ready(function() {
     startConn();
     setInterval(checkConn,5000);
 });
+
+
+function notification(message, isError){
+    $.jGrowl(message);
+}
