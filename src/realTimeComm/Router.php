@@ -10,6 +10,7 @@ class Router implements MessageComponentInterface {
 	
 	public function __construct(){
 		$this->controller = new \realTimeComm\Controller();
+		$this->controller->clients = new \SplObjectStorage();
 	}
 	
 	/**
@@ -19,7 +20,7 @@ class Router implements MessageComponentInterface {
 	 */
 	function onOpen(ConnectionInterface $conn)
 	{
-		// TODO: Implement onOpen() method.
+		$this->controller->clients->attach($conn);
 	}
 	
 	/**
