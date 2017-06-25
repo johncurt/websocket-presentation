@@ -30,7 +30,7 @@ class Router implements MessageComponentInterface {
 	 */
 	function onClose(ConnectionInterface $conn)
 	{
-		// TODO: Implement onClose() method.
+		$this->controller->clients->detach($conn);
 	}
 	
 	/**
@@ -42,7 +42,11 @@ class Router implements MessageComponentInterface {
 	 */
 	function onError(ConnectionInterface $conn, \Exception $e)
 	{
-		// TODO: Implement onError() method.
+		try {
+			$conn->send(json_encode(['action' => 'notification', 'message' => $e->getMessage(), 'error' => true]));
+		} catch (\Exception $e){
+			//should probably log this...
+		}
 	}
 	
 	/**
