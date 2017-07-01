@@ -1,6 +1,6 @@
 
 var wsURL = 'ws://'+window.location.hostname+':8100';
-wsURL = 'ws://127.0.0.1/:8100';
+// wsURL = 'ws://54.174.15.61/:8100';
 var wsConn = null;
 
 function startConn(){
