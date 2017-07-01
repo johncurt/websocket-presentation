@@ -7,7 +7,13 @@ use Ratchet\WebSocket\WsServer;
 //load composer
 require 'vendor/autoload.php';
 
-$app = new Router();
+$ticker = json_decode(file_get_contents('https://blockchain.info/ticker'));
+$btc = $ticker->USD->last;
+$ticker = json_decode(file_get_contents('https://etherlive.ethnews.com/api/v2/live?exchange=All&currency=USD'));
+$eth = $ticker->price;
+$coins = ['bitcoin'=>$btc,'ether'=>$eth];
+
+$app = new Router($coins);
 
 //setup server
 $server = IoServer::factory(
@@ -19,11 +25,7 @@ $server = IoServer::factory(
 	8100
 );
 
-$ticker = json_decode(file_get_contents('https://blockchain.info/ticker'));
-$btc = $ticker->USD->last;
-$ticker = json_decode(file_get_contents('https://etherlive.ethnews.com/api/v2/live?exchange=All&currency=USD'));
-$eth = $ticker->price;
-$coins = ['bitcoin'=>$btc,'ether'=>$eth];
+
 
 
 $server->loop->addPeriodicTimer(10, function() use ($app, &$coins){

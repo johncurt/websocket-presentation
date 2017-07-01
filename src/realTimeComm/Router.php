@@ -8,10 +8,12 @@ class Router implements MessageComponentInterface {
 	
 	public $controller;
 	
-	public function __construct(){
+	public $coins;
+	
+	public function __construct(&$coins){
 		$this->controller = new \realTimeComm\Controller();
 		$this->controller->clients = new \SplObjectStorage();
-		
+		$this->coins = &$coins;
 	}
 	
 	/**
@@ -22,6 +24,10 @@ class Router implements MessageComponentInterface {
 	function onOpen(ConnectionInterface $conn)
 	{
 		$this->controller->clients->attach($conn);
+		$message = json_encode(['action'=>'bitcoin', 'price'=>number_format($this->coins['bitcoin'],2), 'error'=>false]);
+		$conn->send($message);
+		$message = json_encode(['action'=>'ether', 'price'=>number_format($this->coins['ether'],2), 'error'=>false]);
+		$conn->send($message);
 	}
 	
 	/**
