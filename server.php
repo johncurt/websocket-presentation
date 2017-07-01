@@ -19,14 +19,18 @@ $server = IoServer::factory(
 	8100
 );
 
-$coins = ['usd'=>0.00,'ether'=>0.00];
+$ticker = json_decode(file_get_contents('https://blockchain.info/ticker'));
+$btc = $ticker->USD->last;
+$ticker = json_decode(file_get_contents('https://etherlive.ethnews.com/api/v2/live?exchange=All&currency=USD'));
+$eth = $ticker->price;
+$coins = ['bitcoin'=>$btc,'ether'=>$eth];
 
 
 $server->loop->addPeriodicTimer(10, function() use ($app, &$coins){
 	$ticker = json_decode(file_get_contents('https://blockchain.info/ticker'));
 	$usd = $ticker->USD->last;
-	if ($coins['usd']!==$usd){
-		$coins['usd']=$usd;
+	if ($coins['bitcoin']!==$usd){
+		$coins['bitcoin']=$usd;
 		$message = json_encode(['action'=>'bitcoin', 'price'=>number_format($usd,2), 'error'=>false]);
 		foreach ($app->controller->clients as $conn){
 			$conn->send($message);
