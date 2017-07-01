@@ -2,7 +2,7 @@
 var wsURL = 'ws://'+window.location.hostname+':8100';
 // wsURL = 'ws://54.174.15.61/:8100';
 var wsConn = null;
-
+var jBtc;
 function startConn(){
     try {
         wsConn = new WebSocket(wsURL);
@@ -26,6 +26,9 @@ function startConn(){
                 case 'notification':
                     notification(incomingMessage.message, incomingMessage.error);
                     break;
+                case 'bitcoin':
+                    if (jBtc.text()!==incomingMessage.price) jBtc.text(incomingMessage.price);
+                    break;
                 default:
                     console.log('Error: Invalid action received: ' + incomingMessage.type);
                     break;
@@ -46,6 +49,7 @@ function checkConn(){
 }
 
 $(document).ready(function() {
+    jBtc = jQuery('#bitCoinPrice');
     startConn();
     setInterval(checkConn,5000);
 });
