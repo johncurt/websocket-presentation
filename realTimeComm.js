@@ -1,5 +1,6 @@
 
 var wsURL = 'ws://'+window.location.hostname+':8100';
+wsURL = 'ws://127.0.0.1/:8100';
 var wsConn = null;
 
 function startConn(){
@@ -41,7 +42,7 @@ function startConn(){
 }
 
 function checkConn(){
-    if(!wsConn || wsConn.readyState == 3) startConn();
+    if(!wsConn || wsConn.readyState === 3) startConn();
 }
 
 $(document).ready(function() {

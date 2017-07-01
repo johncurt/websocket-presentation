@@ -6,11 +6,12 @@ use Ratchet\ConnectionInterface;
 
 class Router implements MessageComponentInterface {
 	
-	private $controller;
+	public $controller;
 	
 	public function __construct(){
 		$this->controller = new \realTimeComm\Controller();
 		$this->controller->clients = new \SplObjectStorage();
+		
 	}
 	
 	/**

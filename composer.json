@@ -12,10 +12,10 @@
   },
   "scripts": {
     "post-install-cmd": [
-      "bower install"
+      "yarn install"
     ],
     "post-update-cmd": [
-      "bower update"
+      "yarn install"
     ]
   }
 }

@@ -1,0 +1,12 @@
+{
+  "name": "websocket-presentation",
+  "version": "0.1.0",
+  "main": "realTimeComm.js",
+  "repository": "git@github.com:johncurt/websocket-presentation.git",
+  "author": "John Fansler <john.fansler@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jgrowl": "^1.4.5",
+    "jquery": "^3.2.1"
+  }
+}
