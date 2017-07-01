@@ -19,7 +19,7 @@ $server = IoServer::factory(
 	8100
 );
 
-$coins = ['usd'=>0];
+$coins = ['usd'=>0.00,'ether'=>0.00];
 
 
 $server->loop->addPeriodicTimer(10, function() use ($app, &$coins){
