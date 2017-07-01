@@ -38,9 +38,10 @@ $server->run();
 
 
 
-\Ratchet\Client\connect('wss://ws.pusherapp.com/app/de504dc5763aeef9ff52?protocol=7&client=js&version=2.1.6&flash=false')->then(function($conn) use ($app, &$coins, &$conn) {
+$websocketClient = \Ratchet\Client\connect('wss://ws.pusherapp.com/app/de504dc5763aeef9ff52?protocol=7&client=js&version=2.1.6&flash=false')->then(function($conn) use ($app, &$coins, &$conn) {
 	$conn->on('message', function($msg) use ($conn, &$coins, $app) {
 		$msgObject = json_decode($msg);
+		var_dump($msgObject);
 		$usd = $msgObject->data->price;
 		if ($coins['usd']!==$usd){
 			$coins['usd']=$usd;
@@ -54,3 +55,5 @@ $server->run();
 }, function ($e) {
 	echo "Could not connect: {$e->getMessage()}\n";
 });
+
+var_dump($websocketClient);
