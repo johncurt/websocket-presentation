@@ -21,7 +21,7 @@ $server = IoServer::factory(
 
 $coins = ['usd'=>0];
 
-$server->loop->addPeriodicTimer(5, function() use ($app, $coins){
+$server->loop->addPeriodicTimer(5, function() use ($app, &$coins){
 	$ticker = json_decode(file_get_contents('https://blockchain.info/ticker'));
 	$usd = $ticker->USD->last;
 	if ($coins['usd']!==$usd){
