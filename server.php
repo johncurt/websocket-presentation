@@ -45,8 +45,8 @@ $server->run();
 		if ($coins['usd']!==$usd){
 			$coins['usd']=$usd;
 			$message = json_encode(['action'=>'bitcoin', 'price'=>number_format($usd,2), 'error'=>false]);
-			foreach ($app->controller->clients as $conn){
-				$conn->send($message);
+			foreach ($app->controller->clients as $serverConn){
+				$serverConn->send($message);
 			}
 		}
 	});
