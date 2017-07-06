@@ -1,6 +1,6 @@
 
 var wsURL = 'ws://'+window.location.hostname+':8100';
-// wsURL = 'ws://54.174.15.61/:8100';
+
 var wsConn = null;
 var jBtc;
 var jEth;

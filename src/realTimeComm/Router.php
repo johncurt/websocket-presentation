@@ -31,7 +31,8 @@ class Router implements MessageComponentInterface {
 	}
 	
 	/**
-	 * This is called before or after a socket is closed (depends on how it's closed).  SendMessage to $conn will not result in an error if it has already been closed.
+	 * This is called before or after a socket is closed (depends on how it's closed).
+	 * SendMessage to $conn will not result in an error if it has already been closed.
 	 * @param  ConnectionInterface $conn The socket/connection that is closing/closed
 	 * @throws \Exception
 	 */
