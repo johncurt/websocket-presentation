@@ -1,5 +1,6 @@
 
 var wsURL = 'ws://'+window.location.hostname+':8100';
+wsURL = 'ws://localhost:8100';
 
 var wsConn = null;
 var jBtc;
@@ -17,8 +18,8 @@ function startConn(){
             try {
                 incomingMessage = JSON.parse(e.data);
             } catch (e) {
-                console.log(e + ': ' + e.data);
-                incomingMessage = [];
+                console.log(e, e.data);
+                incomingMessage = {};
             }
 
             console.log(incomingMessage); //for debug
@@ -50,6 +51,10 @@ function startConn(){
 
 function checkConn(){
     if(!wsConn || wsConn.readyState === 3) startConn();
+}
+
+function wsSend(payload){
+    wsConn.send(JSON.stringify(payload));
 }
 
 $(document).ready(function() {

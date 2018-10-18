@@ -1,6 +1,6 @@
 {
   "name": "websocket-presentation",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "realTimeComm.js",
   "repository": "git@github.com:johncurt/websocket-presentation.git",
   "author": "John Fansler <john.fansler@gmail.com>",

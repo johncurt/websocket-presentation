@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Sample Websocket Client</title>
-    <link rel="stylesheet" href="bower_components/jGrowl/jquery.jgrowl.min.css" />
+    <link rel="stylesheet" href="node_modules/jGrowl/jquery.jgrowl.min.css" />
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/jgrowl/jquery.jgrowl.min.js"></script>
     <script src="realTimeComm.js"></script>
-    <script src="https://use.fontawesome.com/678a03bf3e.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <body>
-<div><i class="fa fa-money" aria-hidden="true"></i>1 BTC = $<span id="bitCoinPrice"></span></div>
-<div><i class="fa fa-money" aria-hidden="true"></i>1 ETH = $<span id="etherPrice"></span></div>
+<div><i class="fab fa-bitcoin" aria-hidden="true" style="width:20px; text-align: center;"></i>1 BTC = $<span id="bitCoinPrice"></span></div>
+<div><i class="fab fa-ethereum" aria-hidden="true" style="width:20px; text-align: center;"></i>1 ETH = $<span id="etherPrice"></span></div>
+<div>
+    <button type="button" onclick="wsSend({route: 'ChatBack', action:'hello'});">Send Hello</button>
+    <button type="button" onclick="wsSend({action:'invalid'});">Send Invalid</button>
+</div>
 </body>
 </html>
